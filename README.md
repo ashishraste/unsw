@@ -15,22 +15,22 @@ Practical programming task on file IO.
 #### Building
 1. From the parent directory (unsw/), do the following. <br/>
 <code>
-mkdir build; cd build <br/>
-cmake ../ <br/>
-make
+mkdir build; cd build;
+cmake ../;
+make;
 </code>
 2. Builds two binaries by name : `string_generator` and `string_processor`.
 
 
 #### Running the binaries
 1. For string_generator <br/> 
-<code>
-./string_generator <min-length-of-string> <max-length-of-string> <file-size> <output-file-name>
-</code>
+
+`./string_generator <min-length-of-string> <max-length-of-string> <file-size> <output-file-name>`
+
+
 2. For string_processor <br/>
-<code>
-./string_processor <input-file-of-strings> <output-file> <time-delay> 
-</code>
+
+`./string_processor <input-file-of-strings> <output-file> <time-delay> `
 
 #### Thoughts
 1. On string_generator <br/>
