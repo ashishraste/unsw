@@ -13,7 +13,7 @@ Practical programming task on file IO.
 1. Requires Boost library, version >= 1.54.
 
 #### Building
-1. From the parent directory (unsw/), do the following. <br/>
+1. From the parent directory (unsw/), do the following.
 <code>
 mkdir build; cd build;
 cmake ../;
