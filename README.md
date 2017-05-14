@@ -27,11 +27,15 @@ make;
 1. For string_generator <br/> 
 
 `./string_generator <min-length-of-string> <max-length-of-string> <file-size> <output-file-name>`
+<br/>
+Output : Writes random strings, given length constraints, to a file.
 
 
 2. For string_processor <br/>
 
 `./string_processor <input-file-of-strings> <output-file> <time-delay> `
+<br/>
+Output : Reads strings from a given file, sorts them and writes it to another file.
 
 #### Thoughts
 1. On string_generator <br/>
