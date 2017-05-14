@@ -18,7 +18,8 @@ Practical programming task on file IO.
 mkdir build; cd build;
 cmake ../;
 make;
-</code>
+</code> <br/>
+
 2. Builds two binaries by name : `string_generator` and `string_processor`.
 
 
