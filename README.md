@@ -38,6 +38,7 @@ make;
 Running either or both of string-generation and file-writing, using multiple threads, could speed up the process. Would most likely spike RAM usage but could be faster, a tradeoff! <br/>
 2. On string_processor <br/>
 Used only a single thread to read (and write) from a file. Multiple threads weren't used because each of them, while reading, may haphazardly shift the input file's 'reader-head' when doing a read() system call. Hence using one thread, the whole file's content were taken into a buffer on which the processing was done. <br/>
+The sorting method used in expensiveFunc() is not optimal, has a run-time performance of O(n^2). Could implement a trie based structure for an optimal solution. <br/>
 3. Overall <br/>
 Couldn't attempt the other two tasks, ran short of time. Enjoyed the exercise on file IO, thinking about whether or not threads should be used.
 
