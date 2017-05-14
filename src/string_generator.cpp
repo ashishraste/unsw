@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 
   // Need to test running the following in multiple threads.
   // Would probably spike RAM usage but could be faster, a tradeoff!
-  FileWriter writer(1,10,1,filename);
+  FileWriter writer(min,max,totalSize,filename);
   writer.run();
   return 0;  
 }
