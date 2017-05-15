@@ -46,4 +46,8 @@ The sorting method used in expensiveFunc() is not optimal, has a run-time perfor
 3. Overall <br/>
 Couldn't attempt the other two tasks, ran short of time. Enjoyed the exercise on file IO, thinking about whether or not threads should be used.
 
+#### Improvements
+- [x] For string_processor : Generic merge-sort routine to process strings (or any set of characters) read from a file.
+
+
 ---
