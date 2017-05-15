@@ -114,7 +114,7 @@ public:
     int numStr = 0;
     try {
       boost::iostreams::filtering_istream in;
-      in.push(file);                      // gets the whole file content into a buffer
+      in.push(file);                      // gets the whole file content into an input stream buffer
       for(string inputStr; std::getline(in,inputStr);) {
         string sorted = expensiveFunc(inputStr);
         out << sorted << "\n";

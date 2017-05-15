@@ -12,7 +12,7 @@
 using namespace std;
 using namespace boost::iostreams;
 
-// boost::shared_mutex mutex;
+static boost::shared_mutex mutex;
 
 /**
  * @brief      Class for writing random strings to a file.
@@ -27,11 +27,13 @@ public:
     min(1),max(2),fsize(4),fname(string("random.txt"))
   {}
   ~FileWriter()
-  {}
+  {
+    // No resource to release explicitly.
+  }
 
   virtual string generateRandomString()
   {
-    static string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";  // additional characters could be added, if required
+    const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";  // additional characters could be added, if required
     string rstring;
     int length = min + (rand() % (max-min));
     rstring.resize(length);
@@ -43,10 +45,11 @@ public:
 
   void run()
   {
-    stream_buffer<file_sink> buf(fname);
-    ostream out(&buf);
-    static long int filesize = fsize * pow(10,9);  // file size in bytes
-    static long int i;
+    static stream_buffer<file_sink> buf(fname);
+    static ostream out(&buf);
+    boost::unique_lock<boost::shared_mutex> lock{mutex};
+    const long int filesize = fsize * pow(10,9);  // file size in bytes
+    long int i;
     int numStrings = 0;
     for (i=0; i<filesize; ++i) {
       string input = generateRandomString();
@@ -55,6 +58,8 @@ public:
       ++numStrings;
       // cout << "Progress " << numStrings << " written " << "\n";  // uncomment for showing progress, in terms of nuumber of strings written
     }
+    lock.unlock();
+    wait(1);
   }
 
 private:
@@ -62,6 +67,11 @@ private:
   int max;        // maximum length of a random string
   int fsize;      // file size, in GB
   string fname;   // file name
+  void wait(int delay)
+  {
+    boost::this_thread::sleep_for(boost::chrono::seconds{delay});
+  }
+
 };
 
 

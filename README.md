@@ -1,4 +1,4 @@
-#### UNSW 
+### UNSW 
 
 ---
 
@@ -14,27 +14,32 @@ Programming task on file IO.
 
 #### Building
 1. From the parent directory (unsw/), do the following.
-<code>
-mkdir build; cd build;
+
+```
+mkdir build; 
+cd build;
 cmake ../;
 make;
-</code> <br/>
+``` 
 
 2. Builds two binaries by name : `string_generator` and `string_processor`.
 
 
 #### Running the binaries
-1. For string_generator <br/> 
+1. For string_generator
+```
+./string_generator <min-length-of-string> <max-length-of-string> <file-size> <output-file-name>
+```
 
-`./string_generator <min-length-of-string> <max-length-of-string> <file-size> <output-file-name>`
-<br/>
 Output : Writes random strings, given length constraints, to a file.
 
 
-2. For string_processor <br/>
+2. For string_processor
 
-`./string_processor <input-file-of-strings> <output-file> <time-delay> `
-<br/>
+```
+./string_processor <input-file-of-strings> <output-file> <time-delay> 
+```
+
 Output : Reads strings from a given file, sorts them and writes it to another file.
 
 #### Thoughts
@@ -48,6 +53,6 @@ Couldn't attempt the other two tasks, ran short of time. Enjoyed the exercise on
 
 #### Improvements
 - [x] For string_processor : Generic merge-sort routine to process strings (or any set of characters) read from a file.
-
+- [x] Multi-threading for writing into a file. Result : no significant improvement over a single-threaded process. Same amount of time and CPU cycles are taken for writing a given chunk of strings to a file.
 
 ---

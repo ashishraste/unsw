@@ -25,9 +25,17 @@ int main(int argc, char** argv)
 
   srand(time(NULL));  // random seed for generating random strings
 
-  // Need to test running the following in multiple threads.
-  // Would probably spike RAM usage but could be faster, a tradeoff!
   FileWriter writer(min,max,totalSize,filename);
   writer.run();
+
+  // Note : using multiple threads doesn't speed up the writing process.
+  // Would only cause unnecessary switching between threads, which is not expensive though.
+   
+  // boost::thread writerOne(boost::bind(&FileWriter::run,&writer));
+  // boost::thread writerTwo(boost::bind(&FileWriter::run,&writer));
+  // writerOne.join();
+  // writerTwo.join();
+
+  cout << "finished generating a file with random strings.. exiting\n";
   return 0;  
 }
