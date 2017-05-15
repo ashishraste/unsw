@@ -2,14 +2,14 @@
 
 ---
 
-Practical programming task on file IO.
+Programming task on file IO.
 
 
 #### Folder Layout
 1. `include` - directory for the header files.
 2. `src` - directory for the source files.
 
-#### Depencendies
+#### Dependencies
 1. Requires Boost library, version >= 1.54.
 
 #### Building

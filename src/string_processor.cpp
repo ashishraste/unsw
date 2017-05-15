@@ -9,8 +9,8 @@ using namespace std;
  * @param[in]  argc  Number of arguments given as input to this program.
  * @param      argv  Input arguments, requires three of them.
  *
-* @return     Returns 0 (quits peacefully), on success.
- *            Writes the sorted strings to a file (with given name), created in the directory from where this program is run.
+ * @return     Returns 0 (quits peacefully), on success.
+ *             Writes the sorted strings to a file (with given name), created in the directory from where this program is run.
  */
 int main(int argc, char** argv) 
 {
