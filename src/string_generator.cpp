@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   }
   int min = stoi(string(argv[1]),nullptr,0);
   int max = stoi(string(argv[2]),nullptr,0);
-  int totalSize = stoi(string(argv[3]),nullptr,0);
+  double totalSize = stod(string(argv[3]),nullptr);
   string filename = string(argv[4]);
 
   srand(time(NULL));  // random seed for generating random strings
@@ -29,8 +29,7 @@ int main(int argc, char** argv)
   writer.run();
 
   // Note : using multiple threads doesn't speed up the writing process.
-  // Would only cause unnecessary switching between threads, which is not expensive though.
-   
+  // Would only cause unnecessary switching between threads, which is not expensive though.   
   // boost::thread writerOne(boost::bind(&FileWriter::run,&writer));
   // boost::thread writerTwo(boost::bind(&FileWriter::run,&writer));
   // writerOne.join();
