@@ -10,6 +10,8 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 
+using namespace boost::iostreams;
+using namespace std; 
 
 /**
  * @brief      Class for processing a file having random strings.
@@ -23,7 +25,7 @@ public:
   explicit FileProcessor():inFile("random.txt"),outFile("sorted.txt"),delay(1)
   {}
 
-    // Sorting solution given here has worst runtime performance of O(n^2)!
+  // Sorting solution given here has worst runtime performance of O(n^2)!
   virtual std::string naiveSort(std::string str)
   {
     int d=0, length;
@@ -60,7 +62,6 @@ public:
   virtual std::string expensiveFunc(const std::string& str)
   {
     std::string sorted = mergeSort<std::string>(str);
-    wait();                               // additional waiting time
     return sorted;
   }
   
@@ -75,5 +76,78 @@ private:
   std::string inFile;     // input file name from where the strings are read
 };
 
+
+template<typename T> 
+T FileProcessor::sortAndMerge(const T& left, const T& right)
+{
+  int l=0, r=0;
+  T res;
+  // iterate through the elements of left and right arrays, adding the sorted result in res
+  while (l != left.size() && r != right.size()) {
+    if (left[l] > right[r]) {
+      res.push_back(right[r]);
+      ++r;
+    }
+    else {
+      res.push_back(left[l]);
+      ++l;
+    }
+  }
+  // for the elements which are left over in either of the two arrays, we append them directly to res
+  while (l != left.size()) {
+    res.push_back(left[l]);
+    ++l;
+  }
+  while (r != right.size()) {
+    res.push_back(right[r]);
+    ++r;
+  }
+  return res;
+}
+
+
+// Merge sort with O(nlogn) runtime performance.
+template<typename T> 
+T FileProcessor::mergeSort(const string& input)
+{
+  if (input.size() <= 1) return input;
+  T left, right, res;
+  int mid = input.size() / 2;
+  // divide the list of elements in two halves
+  for (int i=0; i<mid; ++i) left.push_back(input[i]);
+  for (int i=mid; i<input.size(); ++i) right.push_back(input[i]);
+  // carry out divide and conquer, bottom-up approach
+  left = mergeSort<T>(left);
+  right = mergeSort<T>(right);
+  // sort and merge the left and right arrays
+  res = sortAndMerge<T>(left,right);
+  return res;
+}
+
+
+void FileProcessor::run()
+{   
+  static stream_buffer<file_sink> buf(outFile);
+  static ostream out(&buf);
+  int numStr = 0;
+  ifstream file(inFile, std::ios_base::in | std::ios_base::binary);
+  boost::iostreams::filtering_istream in;
+  if (file.fail()) {
+    cout << "couldn't open the input file.. please check its name and read permissions\n";
+    return;
+  }
+  try {
+    in.push(file);                      // gets the whole file content into an input stream buffer
+    for(string inputStr; std::getline(in,inputStr);) {
+      string sorted = expensiveFunc(inputStr);
+      out << sorted << "\n";
+      ++numStr;
+      // cout << "Progress " << numStr << " sorted and written\n";      // uncomment to show the progress, in terms of number of strings sorted and written to a file
+    }
+  }
+  catch(std::exception& e) {
+    cout << "exception occurred while reading file\n" << e.what() << "\n";
+  }
+}
 
 #endif

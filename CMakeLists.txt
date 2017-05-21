@@ -12,6 +12,9 @@ target_link_libraries(string_generator ${Boost_LIBRARIES})
 add_executable(string_processor src/string_processor.cpp)
 target_link_libraries(string_processor ${Boost_LIBRARIES})
 
+add_executable(string_verifier src/string_verifier.cpp)
+target_link_libraries(string_verifier ${Boost_LIBRARIES})
+
 install(
   TARGETS string_generator
   DESTINATION ${PROJECT_SOURCE_DIR}/bin
