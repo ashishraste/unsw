@@ -44,6 +44,7 @@ public:
     static boost::iostreams::stream_buffer<boost::iostreams::file_sink> buf(fname);
     static std::ostream out(&buf);
     static const long int filesize = (long int)(fsize * pow(10,9));  // file size in bytes
+    std::cout << "filesize " << filesize << "\n";
     int numStrings = 0;
     while (bytesWritten < filesize) {
       std::string input = generateRandomString();
@@ -68,7 +69,7 @@ private:
   int max;            // maximum length of a random string
   double fsize;       // file size, in GB
   std::string fname;  // file name
-  int bytesWritten;
+  long int bytesWritten;
 
 
 };
